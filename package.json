@@ -6,8 +6,8 @@
   "author": "frdrks",
   "license": "MIT",
   "private": false,
-  "main": "dist/stl.js",
-  "types": "dist/stl.d.ts",
+  "main": "dist/stl.umd.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "webpack --config .webpack/config.js",
     "test": "jest --verbose"
