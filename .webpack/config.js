@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'stl.js',
+    filename: 'stl.umd.js',
     library: 'stl',
     libraryTarget: 'umd',
     umdNamedDefine: true,
