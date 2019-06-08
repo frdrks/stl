@@ -7,9 +7,11 @@
   "license": "MIT",
   "private": false,
   "main": "dist/stl.umd.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/dts/index.d.ts",
   "scripts": {
-    "build": "webpack --config .webpack/config.js",
+    "build": "yarn build:lib &&  yarn build:dts",
+    "build:lib": "webpack --config .webpack/config.js",
+    "build:dts": "tsc --emitDeclarationOnly --outDir dist/dts/",
     "test": "jest --verbose"
   },
   "devDependencies": {
