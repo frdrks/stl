@@ -1,6 +1,5 @@
 {
   "name": "stl",
-
   "version": "0.0.1",
   "description": "Simple time lib",
   "author": "frdrks",
@@ -12,7 +11,8 @@
     "build": "yarn build:lib &&  yarn build:dts",
     "build:lib": "webpack --config .webpack/config.js",
     "build:dts": "tsc --emitDeclarationOnly --outDir dist/dts/",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:lint": "standard"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -22,6 +22,7 @@
     "babel-loader": "^8.0.6",
     "jest": "^24.8.0",
     "source-map-loader": "^0.2.4",
+    "standard": "^12.0.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.1",
     "webpack": "^4.33.0",
