@@ -68,7 +68,7 @@ describe('Remaining time on January 1st 1970', () => {
 
   test('Get remaining time of week', () => {
     const ts = new Date(0).getTime()
-    expect(remaining(WEEK, ts)).toBe(3 * 24 * 60 * 60 * 1000)
+    expect(remaining(WEEK, ts)).toBe(4 * 24 * 60 * 60 * 1000)
   })
 })
 
@@ -92,9 +92,9 @@ describe('Remaining time on dates prior to 1970', () => {
 
   test('Get remaining time of week', () => {
     const ts = new Date('1965-06-16T00:00:00.000Z').getTime()
-    const ms12Hours = (5 * 24 * 60 * 60 * 1000)
+    const remainingTime = 5 * 24 * 60 * 60 * 1000
 
-    expect(remaining(WEEK, ts)).toBe(ms12Hours)
+    expect(remaining(WEEK, ts)).toBe(remainingTime)
   })
 
   test('Get remaining time of entire week', () => {

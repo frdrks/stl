@@ -42,13 +42,18 @@ describe('Elapsed time on January 1st 1970', () => {
   })
 
   test('Get elapsed time for day', () => {
-    const ts = new Date(DAY / 2).getTime()
+    const ts = new Date( DAY / 2).getTime()
     expect(elapsed(DAY, ts)).toBe(DAY / 2)
   })
 
   test('Get elapsed time for ended day', () => {
     const ts = new Date(DAY - 1).getTime()
     expect(elapsed(DAY, ts)).toBe(DAY - 1)
+  })
+
+  test('Get elapsed time for week', () => {
+    const ts = new Date('1970-01-04T12:00:00.000Z').getTime()
+    expect(elapsed(WEEK, ts)).toBe(WEEK - (DAY / 2))
   })
 })
 

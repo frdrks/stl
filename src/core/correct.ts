@@ -1,65 +1,95 @@
-import { DAY, WEEK, YEAR, FIRST_EPOCH_DAY, MONTH } from './constants'
+import { DAY, WEEK, YEAR, MONTH, EPOCH_FIRST_WEEK } from './constants'
 
 export function correct (interval: number, timestamp: number): number {
   switch (interval) {
+
     case WEEK:
-      return _correctFirstWeek(timestamp)
+      return Instant(timestamp)
+          .map(_correctEpochFirstWeek)
+          .value()
+
     case YEAR:
-      return _correctLeapYears(timestamp)
+      return Instant(timestamp)
+          .map(_correctLeapYears)
+          .value()
+
     case MONTH:
-      return _correctUnevenMonths(timestamp)
+      return Instant(timestamp)
+          .map(_correctLeapYears)
+          .map(_correctUnevenMonths)
+          .value()
+
     default:
-      return 0
+      return timestamp
   }
 }
 
-function _correctFirstWeek(timestamp: number): number {
-  switch (true) {
-    case timestamp >= FIRST_EPOCH_DAY:
-      return FIRST_EPOCH_DAY
-    case timestamp <= FIRST_EPOCH_DAY && timestamp >= 0:
-      return -FIRST_EPOCH_DAY
-    case timestamp < 0:
-      return +(FIRST_EPOCH_DAY - WEEK)
-    default:
-      return 0
+function Instant (time: number) {
+  return {
+    map(fn: Function) {
+      return Instant(fn(time))
+    },
+    value (): number { return time }
   }
 }
 
-function _correctUnevenMonths(ts: number): number {
-  const years = Math.trunc(ts / YEAR)
-  const excessDaysTotal = (years * DAY * 5) + _correctLeapYears(ts)
-  const months = Math.trunc(((ts - _correctLeapYears(ts)) % YEAR) / MONTH)
+function _correctEpochFirstWeek(timestamp: number): number {
+
+  /* After first week in unix epoch */
+  if (timestamp >= EPOCH_FIRST_WEEK) {
+    /* Remove first incomplete week in unix epoch*/
+    return timestamp - EPOCH_FIRST_WEEK
+  }
+
+  /* Within first week in unix epoch*/
+  if (timestamp <= EPOCH_FIRST_WEEK && timestamp >= 0) {
+    /* Add missing time in first week in unix epoch */
+    return timestamp + (WEEK - EPOCH_FIRST_WEEK)
+  }
+
+  /* Before unix epoch */
+  if (timestamp < 0) {
+    /* Add missing days from first week in unix epoch */
+    return timestamp - EPOCH_FIRST_WEEK
+  }
+
+  return timestamp
+}
+
+function _correctUnevenMonths(timestamp: number): number {
+  const years = Math.trunc(timestamp / YEAR)
+  const excessDaysTotal = years * DAY * 5
+  const months = Math.trunc((timestamp % YEAR) / MONTH)
 
   switch (months) {
     case 1:
     case 5:
     case 6:
-      return excessDaysTotal + DAY
+      return timestamp - (excessDaysTotal + DAY)
     case 2:
-      return excessDaysTotal - DAY
+      return timestamp - (excessDaysTotal - DAY)
     case 3:
     case 4:
-      return excessDaysTotal
+      return timestamp - excessDaysTotal
     case 7:
-      return excessDaysTotal + (DAY * 2)
+      return timestamp - (excessDaysTotal + (DAY * 2))
     case 8:
     case 9:
-      return excessDaysTotal + (DAY * 3)
+      return timestamp - (excessDaysTotal + (DAY * 3))
     case 10:
     case 11:
-      return excessDaysTotal + (DAY * 4)
+      return timestamp - (excessDaysTotal + (DAY * 4))
     case 12:
-      return excessDaysTotal + (DAY * 5)
+      return timestamp - (excessDaysTotal + (DAY * 5))
   }
 
   return 0
 }
 
 function _correctLeapYears(timestamp: number): number {
-  return _getLeapYears(timestamp) * DAY
+  return timestamp - (_getNumLeapYears(timestamp) * DAY)
 }
 
-function _getLeapYears(timestamp: number): number {
+function _getNumLeapYears(timestamp: number): number {
   return Math.trunc((timestamp + YEAR + YEAR - DAY) / (4 * YEAR))
 }

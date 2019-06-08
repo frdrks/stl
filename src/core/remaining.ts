@@ -1,10 +1,10 @@
-import { correct } from './correct'
+import { elapsed } from "./elapsed"
 
+/**
+ * Get remaining time of given interval and timestamp
+ * @param {number} interval - interval in milliseconds
+ * @param {number} timestamp - milliseconds since start of unix epoch
+ */
 export function remaining (interval: number, timestamp: number): number {
-  const remainingTime = interval - (timestamp - correct(interval, timestamp)) % interval
-  return timestamp >= 0
-    ? remainingTime
-    : remainingTime === interval
-      ? remainingTime
-      : Math.abs(interval - remainingTime)
+  return interval - elapsed(interval, timestamp) % interval
 }
