@@ -6,3 +6,4 @@ export const MONTH = 30 * DAY
 export const YEAR = 365 * DAY
 
 export const EPOCH_FIRST_WEEK = 4 * DAY
+export const EPOCH_FIRST_LEAP_YEAR = YEAR + YEAR - DAY

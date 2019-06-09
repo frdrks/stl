@@ -1,4 +1,4 @@
-import { DAY, WEEK, YEAR, MONTH, EPOCH_FIRST_WEEK } from './constants'
+import { DAY, WEEK, YEAR, MONTH, EPOCH_FIRST_WEEK, EPOCH_FIRST_LEAP_YEAR } from './constants'
 
 export function correct (interval: number, timestamp: number): number {
   switch (interval) {
@@ -89,5 +89,5 @@ function _correctLeapYears (timestamp: number): number {
 }
 
 function _getNumLeapYears (timestamp: number): number {
-  return Math.trunc((timestamp + YEAR + YEAR - DAY) / (4 * YEAR))
+  return Math.trunc((timestamp + (Math.sign(timestamp) * EPOCH_FIRST_LEAP_YEAR)) / (4 * YEAR))
 }
