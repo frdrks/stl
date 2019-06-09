@@ -18,6 +18,8 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
     "@types/jest": "^24.0.13",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "jest": "^24.8.0",
@@ -27,6 +29,10 @@
     "typescript": "^3.5.1",
     "webpack": "^4.33.0",
     "webpack-cli": "^3.3.2"
+  },
+  "standard": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [ "@typescript-eslint/eslint-plugin" ]
   },
   "jest": {
     "roots": [

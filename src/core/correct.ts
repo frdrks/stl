@@ -2,22 +2,21 @@ import { DAY, WEEK, YEAR, MONTH, EPOCH_FIRST_WEEK } from './constants'
 
 export function correct (interval: number, timestamp: number): number {
   switch (interval) {
-
     case WEEK:
       return Instant(timestamp)
-          .map(_correctEpochFirstWeek)
-          .value()
+        .map(_correctEpochFirstWeek)
+        .value()
 
     case YEAR:
       return Instant(timestamp)
-          .map(_correctLeapYears)
-          .value()
+        .map(_correctLeapYears)
+        .value()
 
     case MONTH:
       return Instant(timestamp)
-          .map(_correctLeapYears)
-          .map(_correctUnevenMonths)
-          .value()
+        .map(_correctLeapYears)
+        .map(_correctUnevenMonths)
+        .value()
 
     default:
       return timestamp
@@ -26,22 +25,21 @@ export function correct (interval: number, timestamp: number): number {
 
 function Instant (time: number) {
   return {
-    map(fn: Function) {
+    map (fn: Function) {
       return Instant(fn(time))
     },
     value (): number { return time }
   }
 }
 
-function _correctEpochFirstWeek(timestamp: number): number {
-
+function _correctEpochFirstWeek (timestamp: number): number {
   /* After first week in unix epoch */
   if (timestamp >= EPOCH_FIRST_WEEK) {
-    /* Remove first incomplete week in unix epoch*/
+    /* Remove first incomplete week in unix epoch */
     return timestamp - EPOCH_FIRST_WEEK
   }
 
-  /* Within first week in unix epoch*/
+  /* Within first week in unix epoch */
   if (timestamp <= EPOCH_FIRST_WEEK && timestamp >= 0) {
     /* Add missing time in first week in unix epoch */
     return timestamp + (WEEK - EPOCH_FIRST_WEEK)
@@ -86,10 +84,10 @@ function _correctUnevenMonths(timestamp: number): number {
   return 0
 }
 
-function _correctLeapYears(timestamp: number): number {
+function _correctLeapYears (timestamp: number): number {
   return timestamp - (_getNumLeapYears(timestamp) * DAY)
 }
 
-function _getNumLeapYears(timestamp: number): number {
+function _getNumLeapYears (timestamp: number): number {
   return Math.trunc((timestamp + YEAR + YEAR - DAY) / (4 * YEAR))
 }

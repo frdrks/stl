@@ -1,4 +1,4 @@
-import { elapsed } from "./elapsed"
+import { elapsed } from './elapsed'
 
 /**
  * Get remaining time of given interval and timestamp
