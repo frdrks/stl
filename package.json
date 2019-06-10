@@ -12,7 +12,7 @@
     "build:lib": "webpack --config .webpack/config.js",
     "build:dts": "tsc --emitDeclarationOnly --outDir dist/dts/",
     "test": "jest --verbose",
-    "test:lint": "standard"
+    "test:lint": "standard ./src/** ./src/**/** ./src/**/**/**"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
