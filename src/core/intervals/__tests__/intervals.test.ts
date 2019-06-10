@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { week } from '../week'
 import { year } from '../year'
 import { YEAR } from '../../constants'

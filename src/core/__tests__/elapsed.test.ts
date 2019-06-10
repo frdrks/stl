@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { elapsed } from '../elapsed'
 import { DAY, WEEK } from '../constants'
 

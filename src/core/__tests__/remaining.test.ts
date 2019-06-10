@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { remaining } from '../remaining'
 import { DAY, MONTH, WEEK } from '../constants'
 

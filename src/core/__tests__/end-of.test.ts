@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { endOf } from '../end-of'
 import { DAY, WEEK, YEAR } from '../constants'
 
