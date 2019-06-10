@@ -44,7 +44,7 @@ describe('Elapsed time on January 1st 1970', () => {
   })
 
   test('Get elapsed time for day', () => {
-    const ts = new Date( DAY / 2).getTime()
+    const ts = new Date(DAY / 2).getTime()
     expect(elapsed(DAY, ts)).toBe(DAY / 2)
   })
 

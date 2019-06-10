@@ -54,7 +54,7 @@ function _correctEpochFirstWeek (timestamp: number): number {
   return timestamp
 }
 
-function _correctUnevenMonths(timestamp: number): number {
+function _correctUnevenMonths (timestamp: number): number {
   const years = Math.trunc(timestamp / YEAR)
   const excessDaysTotal = years * DAY * 5
   const months = Math.trunc((timestamp % YEAR) / MONTH)
