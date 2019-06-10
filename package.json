@@ -11,7 +11,8 @@
     "build": "yarn build:lib &&  yarn build:dts",
     "build:lib": "webpack --config .webpack/config.js",
     "build:dts": "tsc --emitDeclarationOnly --outDir dist/dts/",
-    "test": "jest --verbose",
+    "test": "yarn test:lint && yarn test:unit",
+    "test:unit": "jest",
     "test:lint": "standard ./src/** ./src/**/** ./src/**/**/**"
   },
   "devDependencies": {
