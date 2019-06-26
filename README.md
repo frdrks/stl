@@ -13,6 +13,9 @@ To keep it lightweight, STL should avoid an extensive
 set of utility and helper functions – and provide composable
 low level functions.
 
+The library should also be, where applicable, interoperable 
+with the native Javascript `Date` object.
+
 ## Proposed interface
 These are only proposed implementations, to guide further
 development of the library. In other words, this is not working
@@ -33,6 +36,7 @@ const getDuration = (t1, t2) => {
       return Object.keys(units)
         .filter(key => units[key] > 0)
         .reduce((acc, cur) => {
+          // TODO: Make use of tagged template?
           return `${acc} ${units[cur]} ${cur}`
         }, '')
     })
