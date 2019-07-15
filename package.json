@@ -31,6 +31,9 @@
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6"
   },
+  "resolutions": {
+    "@babel/**/lodash": "^4.17.14"
+  },
   "standard": {
     "parser": "@typescript-eslint/parser",
     "plugins": [ "@typescript-eslint/eslint-plugin" ]
